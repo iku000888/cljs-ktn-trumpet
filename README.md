@@ -11,6 +11,10 @@
 - Did not want to write externs :P
 - Would like to use ClojureScript to customize kintone
 
+## Install
+
+[![Clojars Project](https://img.shields.io/clojars/v/iku000888/cljs-ktn-trumpet.svg)](https://clojars.org/iku000888/cljs-ktn-trumpet)
+
 ## Which functions are wrapped?
 
 Everything is included in the `cljs-ktn-trumpet.api` namespace.
