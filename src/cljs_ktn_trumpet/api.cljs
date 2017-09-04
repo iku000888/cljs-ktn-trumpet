@@ -149,3 +149,32 @@
                              {:fileKey file-key})}}}
              success-handler
              error-handler)))
+
+(defn get-space-members-request [space-id success-handler error-handler]
+  (request "/k/v1/space/members"
+           "GET"
+           {:id space-id}
+           success-handler
+           error-handler))
+
+(defn mount-css-link [url]
+  (let [l (aget (.getElementsByTagName js/document "link") 0)]
+    (.insertBefore (.-parentNode l)
+                   (doto (.createElement js/document "link")
+                     (o/set "type" "text/css")
+                     (o/set "rel" "stylesheet")
+                     (o/set "href" url))
+                   l)))
+
+(defn post-comment-request [space-id thread-id
+                            text mentions
+                            success-handler
+                            error-handler]
+  (request "/k/v1/space/thread/comment"
+           "POST"
+           {:space space-id
+            :thread thread-id
+            :comment {:text text
+                      :mentions mentions}}
+           success-handler
+           error-handler))
