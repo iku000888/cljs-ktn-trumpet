@@ -178,3 +178,34 @@
                       :mentions mentions}}
            success-handler
            error-handler))
+
+(defn get-app-acl-request [app-id success-handler error-handler]
+  (request "/k/v1/app/acl" "GET"
+           {:app app-id}
+           success-handler
+           error-handler))
+
+(defn get-all-records [app-id query success-handler error-handler]
+  (let [step 500
+        a (doto (atom {:records []})
+            (add-watch ::watch (fn [_ _ _ {:keys [records total-count]}]
+                                 (when (= total-count (str (count records)))
+                                   (success-handler records)))))
+        add-response-fn (fn [res]
+                          (swap! a (fn [old-val]
+                                     (->  old-val
+                                          (update :records #(->  res
+                                                                 (o/get "records")
+                                                                 (js->clj :keywordize-keys true)
+                                                                 (->> (into %))))
+                                          (assoc :total-count (o/get res "totalCount"))))))
+        request-fn (fn [q callback]
+                     (get-records-request app-id q nil true callback error-handler))]
+    (request-fn (str query " limit " step)
+                (fn [res]
+                  (add-response-fn res)
+                  (let [remaining-count (- (js/parseInt (o/get res "totalCount")) step)
+                        remaining-reqs (js/Math.ceil (/ remaining-count step))]
+                    (doseq [i (range 1 (inc remaining-reqs))]
+                      (request-fn (str query " limit " step " offset " (* step i))
+                                  add-response-fn)))))))
