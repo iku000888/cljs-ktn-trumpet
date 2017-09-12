@@ -209,3 +209,14 @@
                     (doseq [i (range 1 (inc remaining-reqs))]
                       (request-fn (str query " limit " step " offset " (* step i))
                                   add-response-fn)))))))
+
+(defn mount-js-link [src]
+  (let [s (-> js/document
+              (.getElementsByTagName "script")
+              (.item 0))
+        p (.-parentNode s)
+        script-el (doto (.createElement js/document "script")
+                    (o/set "type" "text/javascript")
+                    (o/set "async" "true")
+                    (o/set "src" src))]
+    (.insertBefore p script-el s)))

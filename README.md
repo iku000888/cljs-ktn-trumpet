@@ -45,6 +45,7 @@ Included api's (and mapping to authentic api when applicable)
 | append-file-to-record-field || Attach a file to a field without removing any previous files|
 | get-space-members-request |[documentation](https://developer.cybozu.io/hc/ja/articles/202166220)||
 | mount-css-link || Adds a link dom node for the external css url. Added for convenience|
+| mount-js-link || Adds a script dom node for the external javascript url. Added for convenience|
 | post-commnet-request |[documentation](https://developer.cybozu.io/hc/ja/articles/209732306)||
 | get-app-acl-request |[documentation](https://developer.cybozu.io/hc/ja/articles/209732306)||
 | get-all-records ||Can fetch more than 500 records. Error handler can be invoked multiple times|
