@@ -49,6 +49,7 @@ Included api's (and mapping to authentic api when applicable)
 | post-commnet-request |[documentation](https://developer.cybozu.io/hc/ja/articles/209732306)||
 | get-app-acl-request |[documentation](https://developer.cybozu.io/hc/ja/articles/209732306)||
 | get-all-records ||Can fetch more than 500 records. Error handler can be invoked multiple times|
+| get-all-guest-space-app-records ||Same as get-all-records but for apps in guest space|
 
 
 ## I need api x wrapped for cljs, but do not see it in here!

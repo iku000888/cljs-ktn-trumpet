@@ -1,4 +1,4 @@
-(defproject iku000888/cljs-ktn-trumpet "0.1.3"
+(defproject iku000888/cljs-ktn-trumpet "0.1.4"
   :description "ClojureScript Wrapper for Kintone JavaScript API"
   :url "https://github.com/iku000888/cljs-ktn-trumpet"
   :license {:name "MIT License"
